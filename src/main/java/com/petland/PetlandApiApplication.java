@@ -1,20 +1,27 @@
 package com.petland;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.petland.model.animal.entities.AnimalEntity;
+import com.petland.model.animal.enums.AnimalEspecie;
+import com.petland.model.animal.repository.AnimalRepository;
 import com.petland.model.cadastro.entities.CadastroEntity;
 import com.petland.model.cadastro.entities.Endereco;
 import com.petland.model.cadastro.entities.Perfil;
 import com.petland.model.cadastro.repository.CadastroRepository;
+import com.petland.model.produtoServico.entities.ProdutoServicoEntity;
+import com.petland.model.produtoServico.repository.ProdutoServicoRepository;
 
 @SpringBootApplication
 public class PetlandApiApplication implements CommandLineRunner {
 
     @Autowired
-    private CadastroRepository cadastroRepository;
+    private ProdutoServicoRepository repository;
 
     public static void main(String[] args) {
         SpringApplication.run(PetlandApiApplication.class, args);
@@ -22,19 +29,11 @@ public class PetlandApiApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        CadastroEntity pessoa = new CadastroEntity();
-        pessoa.setNome("maria");
+		ProdutoServicoEntity servico = new ProdutoServicoEntity();
+		servico.setNome("tosa");
+		servico.setServico(true);
+		servico.setValor(50.0);
 
-		Perfil perfil = new Perfil();
-		perfil.setCliente(true);
-
-		pessoa.setPerfil(perfil);
-
-		Endereco endereco = new Endereco();
-		endereco.setLogradouro("Rua 1");
-		endereco.setNumero("123");
-
-		pessoa.setEndereco(endereco);
-        cadastroRepository.save(pessoa);
+		repository.save(servico);
     }
 }
