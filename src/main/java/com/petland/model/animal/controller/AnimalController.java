@@ -7,18 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.petland.model.animal.entities.AnimalEntity;
-import com.petland.model.animal.repository.AnimalRepository;
+import com.petland.model.animal.dto.AnimalResponseDTO;
+import com.petland.model.animal.service.AnimalService;
 
 @RestController
 @RequestMapping("/animais")
 public class AnimalController {
 
     @Autowired
-    private AnimalRepository animalRepository;
+    private AnimalService animalService;
 
     @GetMapping("/")
-    public List<AnimalEntity> listar(){
-        return animalRepository.findAll();
+    public List<AnimalResponseDTO> get(){
+        
+        return animalService.listar();
     }
 }
